@@ -39,7 +39,7 @@ sql/
   02_regras_triggers.sql  5 regras de negócio em triggers + view vw_os_total
   03_carga_dados.sql      20 mil clientes, 30 mil veículos, 300 mil OS, ~450 mil itens
   04_indices.sql          8 índices, cada um ligado a uma consulta
-testes/                   34 casos (gerados por scripts/testes_spec.py)
+testes/                   34 casos + README.md com o print de cada teste
 consultas/                C01–C08: relatórios de negócio
 scripts/
   rodar_tudo.sh           recria tudo e gera as evidências
@@ -47,8 +47,10 @@ scripts/
   medir_indices.py        EXPLAIN ANALYZE antes/depois (mediana de 7 execuções)
   comparar_views.py       view GROUP BY x LATERAL
   executar_consultas.py   roda C01–C08
+  gerar_paginas_evidencias.py  monta testes/README.md e evidencias/README.md
   criar_quadro_github.sh  cria issues, sprints e o quadro Kanban
 evidencias/
+  README.md               índices, view e consultas, com os prints
   resultados/             CSV, logs .txt e planos de execução
   capturas/               PNG das saídas reais do psql
 docs/                     metodologia ágil e diagramas
@@ -75,9 +77,15 @@ Requisitos: PostgreSQL 16 (`psql`), Python 3 e Pillow (`pip install pillow`). A 
 
 ## Resultados
 
+> **Onde ver os testes com os prints:**
+> - [**Testes de tipos, restrições e regras (34)**](testes/README.md): um print por teste, organizado em Tipos, Restrições e Regras
+> - [**Índices, view e consultas**](evidencias/README.md): planos de execução antes/depois e prints das consultas C01–C08
+
 ### Testes de tipos, restrições e regras: 34/34 passaram
 
-Resumo completo em [`evidencias/resultados/resumo_testes.md`](evidencias/resultados/resumo_testes.md). Cada teste tem log em `.txt` e captura em `.png`.
+Lista completa, com o print de cada teste, em [`testes/README.md`](testes/README.md). Exemplo (G02, estoque insuficiente bloqueia o lançamento):
+
+![G02](evidencias/capturas/G02_estoque_insuficiente_bloqueia_o_lancamento.png)
 
 ### Índices (mediana de 7 execuções, 300 mil OS)
 
@@ -94,7 +102,7 @@ Resumo completo em [`evidencias/resultados/resumo_testes.md`](evidencias/resulta
 | B9 OS ABERTAS (0,2%) | `ix_os_status` | 25,46 ms | 1,59 ms | 8.204 → 532 |
 | W1 INSERT de 20 mil OS | todos | 1.250 ms | 1.578 ms | custo de escrita: +26% |
 
-Arquivo: [`evidencias/resultados/indices_antes_depois.csv`](evidencias/resultados/indices_antes_depois.csv). Os tempos variam entre execuções; o número de páginas lidas é a medida mais estável.
+Detalhes e prints dos planos de execução em [`evidencias/README.md`](evidencias/README.md). Os tempos variam entre execuções; o número de páginas lidas é a medida mais estável.
 
 ## Metodologia ágil
 

@@ -12,4 +12,5 @@ echo "== 4/6 Testes de tipos/restrições/regras"; python3 scripts/executar_test
 echo "== 5/6 Índices antes x depois";   python3 scripts/medir_indices.py
 python3 scripts/comparar_views.py
 echo "== 6/6 Consultas de negócio";     python3 scripts/executar_consultas.py > /dev/null
-echo "Pronto. Veja evidencias/resultados e evidencias/capturas."
+python3 scripts/gerar_paginas_evidencias.py
+echo "Pronto. Veja testes/README.md e evidencias/README.md."

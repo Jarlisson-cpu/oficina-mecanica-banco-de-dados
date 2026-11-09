@@ -54,6 +54,7 @@ python scripts\medir_indices.py || goto erro
 python scripts\comparar_views.py || goto erro
 echo == 6/6 Consultas de negocio
 python scripts\executar_consultas.py >nul || goto erro
+python scripts\gerar_paginas_evidencias.py || goto erro
 
 echo.
 echo ================================================================
